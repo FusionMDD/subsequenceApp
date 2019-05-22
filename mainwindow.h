@@ -38,6 +38,7 @@ private:
 
     void findLongestSubstrings();
     void defaultListCase();
+    void changeText();
 
 };
 

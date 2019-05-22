@@ -20,7 +20,6 @@ void MainWindow::defaultListCase()
     {
         ui->listWidget->item(i)->setText(ui->listWidget->item(i)->text().toLower());
     }
-
 }
 
 void MainWindow::findLongestSubstrings()
@@ -77,18 +76,8 @@ void MainWindow::findLongestSubstrings()
     }
 }
 
-void MainWindow::on_pushButton_2_clicked()
+void MainWindow:: changeText()
 {
-    new QListWidgetItem(ui->lineEdit_2->text().toLower(), ui->listWidget);
-    ui->lineEdit_2->setText("");
-}
-
-void MainWindow::on_pushButton_clicked()
-{
-    substringCord.clear();
-
-    defaultListCase();
-
     if (ui->lineEdit->text().size() > 0)
     {
         findLongestSubstrings();
@@ -107,6 +96,22 @@ void MainWindow::on_pushButton_clicked()
 
         }
     }
+
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    new QListWidgetItem(ui->lineEdit_2->text().toLower(), ui->listWidget);
+    ui->lineEdit_2->setText("");
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    substringCord.clear();
+
+    defaultListCase();
+
+    changeText();
 
     ui->listWidget->update();
 

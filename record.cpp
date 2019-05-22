@@ -2,21 +2,21 @@
 
 Record::Record(int number, int begin, int end)
 {
-strNumber = number;
-cordinates = QPair<int,int>(begin, end);
+    strNumber = number;
+    cordinates = QPair<int,int>(begin, end);
 }
 
 Record::Record(const Record & record)
 {
-   this->setStrNumber(record.strNumber);
-   this->setCordinates( record.cordinates.first,record.cordinates.second);
+    this->setStrNumber(record.strNumber);
+    this->setCordinates( record.cordinates.first,record.cordinates.second);
 
 }
 Record::Record()
 {
-   strNumber = 0;
-   cordinates.first = 0;
-   cordinates.second = 0;
+    strNumber = 0;
+    cordinates.first = 0;
+    cordinates.second = 0;
 }
 
 
