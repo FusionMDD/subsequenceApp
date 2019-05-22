@@ -96,7 +96,6 @@ void MainWindow:: changeText()
 
         }
     }
-
 }
 
 void MainWindow::on_pushButton_2_clicked()
