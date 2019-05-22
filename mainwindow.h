@@ -6,6 +6,9 @@
 #include <string>
 #include <QStringListModel>
 #include <algorithm>
+#include "record.h"
+
+
 
 namespace Ui {
 class MainWindow;
@@ -29,11 +32,12 @@ private:
     QStringList list;
     QString substring;
     QString tmp;
-    QVector <int> SubstringSize;
-    QVector <QPair<int,int>> SubstringCord;
+    QVector <int> substringSize;
+    QVector <Record> substringCord;
 
 
     void findLongestSubstrings();
+    void defaultListCase();
 
 };
 
