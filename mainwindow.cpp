@@ -33,15 +33,14 @@ void MainWindow::findLongestSubstrings()
 
         for (auto j = 0; j < mainstring.size(); ++j)
         {
-             counter = 0;
+            counter = 0;
             if (mainstring[j] == tmp[0])
             {
                 for (auto e = j; e < mainstring.size(); ++e)
                 {
-
                     if (mainstring[e] == tmp[e - j] && counter < tmp.size())
                     {
-                        ++counter;
+                        ++counter; //Counting the same letters
                     }
                     else
                     {
@@ -61,12 +60,12 @@ void MainWindow:: changeText()
 {
     for (auto i = 0; i < ui->listWidget->count(); ++i)
     {
-        ui->listWidget->item(i)->setForeground(Qt::black);
+        ui->listWidget->item(i)->setForeground(Qt::black); //Returning default color
     }
 
     if (ui->lineEdit->text().size() > 0)
     {
-        findLongestSubstrings();
+        findLongestSubstrings();  //Function searcher of the longest substrings
     }
 
     int biggestSubstringElement = *std::max_element(substringSize.begin(),substringSize.end());
@@ -78,7 +77,7 @@ void MainWindow:: changeText()
         {
             if (substringSize[i] == biggestSubstringElement )
             {
-                ui->listWidget->item(i)->setForeground(Qt::red);
+                ui->listWidget->item(i)->setForeground(Qt::red); //Painting list
             }
         }
     }
