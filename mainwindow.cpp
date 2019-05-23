@@ -14,62 +14,43 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::defaultListCase()
-{
-    for(auto i = 0; i < ui->listWidget->count(); ++i)
-    {
-        ui->listWidget->item(i)->setText(ui->listWidget->item(i)->text().toLower());
-    }
-}
-
 void MainWindow::findLongestSubstrings()
 {
     int counter = 0;
-    int lastSubElement = 0;
 
-    substring = ui->lineEdit->text();
+    mainstring = ui->lineEdit->text(); //reading mainstring
 
-    for(auto i = 0; i < ui->listWidget->count(); ++i)
+    for (auto i = 0; i < ui->listWidget->count(); ++i)
     {
-        if (i < substringSize.size())
+        tmp = ui->listWidget->item(i)->text();// readeing substrings
+
+        if (tmp.size() > mainstring.size())
         {
-            substringSize[i] = 0;
-        }
-        else
-        {
-            substringSize.push_back(0);
+            continue;
         }
 
-        tmp = ui->listWidget->item(i)->text();
+        substringSize.push_back(0); //filling vector by default values
 
-        for (auto j = 0; j < tmp.size(); ++j)
+        for (auto j = 0; j < mainstring.size(); ++j)
         {
-            if(tmp[j] == substring[0])
+             counter = 0;
+            if (mainstring[j] == tmp[0])
             {
-                counter = 0;
-                lastSubElement = 0;
-
-                for (auto e = j; e < tmp.size(); ++e)
+                for (auto e = j; e < mainstring.size(); ++e)
                 {
-                    if (tmp[e] == substring[e - j])
+
+                    if (mainstring[e] == tmp[e - j] && counter < tmp.size())
                     {
                         ++counter;
-
-                        if( (e - j) > lastSubElement)
-                        {
-                            lastSubElement = e - j;
-                        }
                     }
                     else
                     {
                         break;
                     }
                 }
-                if (counter >= substringSize[i])
+                if (counter > substringSize[i] && counter == tmp.size())
                 {
                     substringSize[i] = counter;
-                    Record tmpRecord (i, j, j + lastSubElement);
-                    substringCord.push_back(tmpRecord);
                 }
             }
         }
@@ -78,41 +59,41 @@ void MainWindow::findLongestSubstrings()
 
 void MainWindow:: changeText()
 {
+    for (auto i = 0; i < ui->listWidget->count(); ++i)
+    {
+        ui->listWidget->item(i)->setForeground(Qt::black);
+    }
+
     if (ui->lineEdit->text().size() > 0)
     {
         findLongestSubstrings();
+    }
 
-        for (auto i = 0; i < substringCord.size(); ++i)
+    int biggestSubstringElement = *std::max_element(substringSize.begin(),substringSize.end());
+
+
+    if (biggestSubstringElement > 0)
+    {
+        for (auto i = 0; i < ui->listWidget->count(); ++i)
         {
-
-            tmp = ui->listWidget->item(substringCord[i].getStrNumber())->text();
-
-            for (auto j = substringCord[i].getCordinatesFirst(); j <= substringCord[i].getCordinatesSecond(); ++j)
+            if (substringSize[i] == biggestSubstringElement )
             {
-                tmp[j]=tmp[j].toUpper();
+                ui->listWidget->item(i)->setForeground(Qt::red);
             }
-
-            ui->listWidget->item(substringCord[i].getStrNumber())->setText(tmp);
-
         }
     }
+
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    new QListWidgetItem(ui->lineEdit_2->text().toLower(), ui->listWidget);
+    new QListWidgetItem(ui->lineEdit_2->text(), ui->listWidget);
     ui->lineEdit_2->setText("");
 }
 
 void MainWindow::on_pushButton_clicked()
 {
-    substringCord.clear();
-
-    defaultListCase();
+    substringSize.clear();
 
     changeText();
-
-    ui->listWidget->update();
-
-    ui->lineEdit->setText("");
 }

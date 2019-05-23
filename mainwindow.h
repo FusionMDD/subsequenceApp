@@ -6,8 +6,6 @@
 #include <string>
 #include <QStringListModel>
 #include <algorithm>
-#include "record.h"
-
 
 
 namespace Ui {
@@ -30,14 +28,11 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QStringList list;
-    QString substring;
+    QString mainstring;
     QString tmp;
     QVector <int> substringSize;
-    QVector <Record> substringCord;
-
 
     void findLongestSubstrings();
-    void defaultListCase();
     void changeText();
 
 };
