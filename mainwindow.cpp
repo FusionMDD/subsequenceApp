@@ -86,8 +86,11 @@ void MainWindow:: changeText()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    new QListWidgetItem(ui->lineEdit_2->text(), ui->listWidget);
-    ui->lineEdit_2->setText("");
+    if( ui->lineEdit_2->text() != "")
+    {
+        new QListWidgetItem(ui->lineEdit_2->text(), ui->listWidget);
+        ui->lineEdit_2->setText("");
+    }
 }
 
 void MainWindow::on_pushButton_clicked()
